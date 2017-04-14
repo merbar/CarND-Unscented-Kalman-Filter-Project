@@ -73,6 +73,8 @@ public:
 
   ///* the current NIS for laser
   double NIS_laser_;
+  
+  long long previous_timestamp_;
 
   /**
    * Constructor
