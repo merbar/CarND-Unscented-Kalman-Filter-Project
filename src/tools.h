@@ -19,6 +19,11 @@ public:
   * A helper method to calculate RMSE.
   */
   Eigen::VectorXd CalculateRMSE(const std::vector<Eigen::VectorXd> &estimations, const std::vector<Eigen::VectorXd> &ground_truth);
+  
+  /**
+  * Normalizes angle in radians to be between -PI and +PI
+  */
+  double NormalizeAngle(const double rad);
 
 };
 

@@ -155,9 +155,7 @@ int main(int argc, char* argv[]) {
   out_file_ << "vy_true" << "\t";
   out_file_ << "NIS" << "\n";
 
-
   for (size_t k = 0; k < number_of_measurements; ++k) {
-    cout << "line: " << k+1 << endl;
     // Call the UKF-based fusion
     ukf.ProcessMeasurement(measurement_pack_list[k]);
 
@@ -227,7 +225,7 @@ int main(int argc, char* argv[]) {
   if (in_file_.is_open()) {
     in_file_.close();
   }
-
+  
   cout << "Done!" << endl;
   return 0;
 }
