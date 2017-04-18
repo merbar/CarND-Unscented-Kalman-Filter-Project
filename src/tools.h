@@ -23,7 +23,7 @@ public:
   /**
   * Normalizes angle in radians to be between -PI and +PI
   */
-  double NormalizeAngle(const double rad);
+  double WrapAngle(const double rad);
 
 };
 
