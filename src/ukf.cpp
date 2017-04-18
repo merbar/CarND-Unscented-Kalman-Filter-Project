@@ -325,8 +325,16 @@ void UKF::UpdateRadar(MeasurementPackage meas_package) {
     double yawDot_pred = Xsig_pred_(4,i);
     double p_pred_meas = sqrt(px_pred*px_pred + py_pred*py_pred);
     if (p_pred_meas < 0.00001) p_pred_meas = 0.00001;
-    double rho_pred_meas = atan2(py_pred,px_pred);
-    double p_dot_pred_meas = ((px_pred*cos(yaw_pred)*v_pred) + (py_pred*sin(yaw_pred)*v_pred)) / p_pred_meas;
+    double rho_pred_meas = 0;
+    double p_dot_pred_meas = 0;
+    rho_pred_meas = atan2(py_pred,px_pred);
+    p_dot_pred_meas = ((px_pred*cos(yaw_pred)*v_pred) + (py_pred*sin(yaw_pred)*v_pred)) / p_pred_meas;
+    /*
+    if (p_pred_meas > 0.00001) {
+        rho_pred_meas = atan2(py_pred,px_pred);
+        p_dot_pred_meas = ((px_pred*cos(yaw_pred)*v_pred) + (py_pred*sin(yaw_pred)*v_pred)) / p_pred_meas;
+    }
+    */
     Zsig(0,i) = p_pred_meas;
     Zsig(1,i) = rho_pred_meas;
     Zsig(2,i) = p_dot_pred_meas;
