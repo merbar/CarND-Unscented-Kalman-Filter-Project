@@ -200,7 +200,7 @@ void UKF::Prediction(double delta_t) {
       px_pred  += 0.5*delta_t_sq*cos(yaw)*v_acc_noise;
       py_pred  += 0.5*delta_t_sq*sin(yaw)*v_acc_noise;
       yaw_pred += 0.5*delta_t_sq*yaw_acc_noise;
-      //yaw_pred = tools_.NormalizeAngle(yaw_pred);
+      //yaw_pred = tools_.WrapAngle(yaw_pred);
       yawRate_pred = yawRate + delta_t*yaw_acc_noise;
       v_pred = v + delta_t*v_acc_noise;
 

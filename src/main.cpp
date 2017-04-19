@@ -131,6 +131,7 @@ int main(int argc, char* argv[]) {
 
   // Create a UKF instance
   UKF ukf;
+  Tools tools_;
 
   // used to compute the RMSE later
   vector<VectorXd> estimations;
@@ -164,7 +165,7 @@ int main(int argc, char* argv[]) {
     out_file_ << ukf.x_(0) << "\t"; // pos1 - est
     out_file_ << ukf.x_(1) << "\t"; // pos2 - est
     out_file_ << ukf.x_(2) << "\t"; // vel_abs -est
-    out_file_ << ukf.x_(3) << "\t"; // yaw_angle -est
+    out_file_ << tools_.WrapAngle(ukf.x_(3)) << "\t"; // yaw_angle -est
     out_file_ << ukf.x_(4) << "\t"; // yaw_rate -est
 
     // output the measurements
