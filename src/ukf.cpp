@@ -26,12 +26,10 @@ UKF::UKF() {
   P_ = MatrixXd(5, 5);
 
   // Process noise standard deviation longitudinal acceleration in m/s^2
-  // dataset 1: 1.5
-  std_a_ = 1.44;
+  std_a_ = 1.3;
 
   // Process noise standard deviation yaw acceleration in rad/s^2
-  // dataset 1: 0.6
-  std_yawdd_ = 0.5175;
+  std_yawdd_ = 0.45;
 
   // Laser measurement noise standard deviation position1 in m
   std_laspx_ = 0.15;
@@ -100,7 +98,6 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
   measurements.
   */
   if (!is_initialized_) {
-    //cout << "initialize start" << endl;
     previous_timestamp_ = meas_package.timestamp_;
     if (meas_package.sensor_type_ == MeasurementPackage::LASER) {
       float px = meas_package.raw_measurements_(0);
@@ -113,18 +110,12 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
       float v = meas_package.raw_measurements_(2);
       float yaw = meas_package.raw_measurements_(1);
       x_ << px, py, 0, 0, 0;
-      //x_ << px, py, 0, 0, 0;
       is_initialized_ = true;
     }
-    //cout << "initialized" << endl;
     return;
   }
   double dt = (meas_package.timestamp_ - previous_timestamp_) / 1000000.0; //dt in seconds
-  // only update prior if a certain amount of time has passed
   Prediction(dt);
-  if (dt > 0.0001) {    
-    previous_timestamp_ = meas_package.timestamp_;
-  }
    
   if ((meas_package.sensor_type_ == MeasurementPackage::LASER) && use_laser_) {
     UpdateLidar(meas_package);
@@ -132,6 +123,7 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
   } else if ((meas_package.sensor_type_ == MeasurementPackage::RADAR) && use_radar_) {
     UpdateRadar(meas_package);
   }
+  previous_timestamp_ = meas_package.timestamp_;
 }
 
 /**
@@ -187,7 +179,6 @@ void UKF::Prediction(double delta_t) {
 
       double delta_t_sq = delta_t*delta_t;
       yaw_pred = yaw + yawRate*delta_t;
-      //yaw_pred = tools_.NormalizeAngle(yaw_pred);
       if (fabs(yawRate) < 0.001) {
         px_pred = px + (v*cos(yaw)*delta_t);
         py_pred = py + (v*sin(yaw)*delta_t);
@@ -200,7 +191,6 @@ void UKF::Prediction(double delta_t) {
       px_pred  += 0.5*delta_t_sq*cos(yaw)*v_acc_noise;
       py_pred  += 0.5*delta_t_sq*sin(yaw)*v_acc_noise;
       yaw_pred += 0.5*delta_t_sq*yaw_acc_noise;
-      //yaw_pred = tools_.WrapAngle(yaw_pred);
       yawRate_pred = yawRate + delta_t*yaw_acc_noise;
       v_pred = v + delta_t*v_acc_noise;
 
@@ -329,12 +319,6 @@ void UKF::UpdateRadar(MeasurementPackage meas_package) {
     double p_dot_pred_meas = 0;
     rho_pred_meas = atan2(py_pred,px_pred);
     p_dot_pred_meas = ((px_pred*cos(yaw_pred)*v_pred) + (py_pred*sin(yaw_pred)*v_pred)) / p_pred_meas;
-    /*
-    if (p_pred_meas > 0.00001) {
-        rho_pred_meas = atan2(py_pred,px_pred);
-        p_dot_pred_meas = ((px_pred*cos(yaw_pred)*v_pred) + (py_pred*sin(yaw_pred)*v_pred)) / p_pred_meas;
-    }
-    */
     Zsig(0,i) = p_pred_meas;
     Zsig(1,i) = rho_pred_meas;
     Zsig(2,i) = p_dot_pred_meas;
