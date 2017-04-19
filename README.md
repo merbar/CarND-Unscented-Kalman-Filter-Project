@@ -15,12 +15,12 @@ I used Normalized Innovation Squared to make sure my filter is consistent. Visua
 
 ## Results
 
-| RMSE goal |  | RMSE UKF | | RMSE UKF (lidar only) | | RMSE UKF (radar only) |
-| --- | ----- |  --- | --- | --- | --- | --- | --- | --- |
-| | *0.09*  | | **0.0685** | | 0.108 | | 0.156 |
-| | *0.10*  | | **0.0827** | | 0.098 | | 0.240 |
-| | *0.40*  | | **0.3329** | | 0.615 | | 0.393 |
-| | *0.30*  | | **0.2333** | | 0.263 | | 0.291 |
+| RMSE goal |  | RMSE UKF | | RMSE UKF (lidar only) | | RMSE UKF (radar only) | |
+| --- | --- |  --- | --- | --- | --- | --- | --- |
+| : | *0.09*  | : | **0.0685** | : | 0.108 | : | 0.156 |
+| : | *0.10*  | : | **0.0827** | : | 0.098 | : | 0.240 |
+| : | *0.40*  | : | **0.3329** | : | 0.615 | : | 0.393 |
+| : | *0.30*  | : | **0.2333** | : | 0.263 | : | 0.291 |
 
 
 ### Position accuracy: 
