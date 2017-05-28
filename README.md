@@ -1,20 +1,23 @@
 # Unscented Kalman Filter
 ## Udacity Self-Driving Car Engineer Nanodegree Program
 
-Implementation of an Unscented Kalman Filter using the CTRV motion model.
+Implementation of an Unscented Kalman Filter to track a detected object using the CTRV motion model. The data sources are simulated radar and lidar measurements, where the radar data differentiates itself by also containing the object's radial velocity.
 
 Sample data for Radar and Lidar input was provided by Mercedes Benz.
+
+This is part of a short series of projects exploring different Kalman filtering methods. The other is:
+* [Extended Kalman Filter](https://github.com/merbar/CarND-Extended-Kalman-Filter-Project)
 
 ## Implementation
 
 Implementation of the EKF is mostly straightforward with emphasis on readability over speed.  
 
-The challenge here was to initialize everything in a reasonable way and tweak the process noise parameters to beat a certain required accuracy threshold.  
+The challenge here was to initialize everything in a reasonable way and tweak the process noise parameters to beat a certain required accuracy threshold (see table below).  
 
-I used Normalized Innovation Squared to make sure my filter is consistent. Visualization for all outputs are contained in a separate IPython notebook `ukf-visualization.ipynb`.  
+I used Normalized Innovation Squared to make sure my filter is consistent.
 
 ## Results
-
+RMSE = Residual Mean Squared Error  
 | RMSE goal | RMSE UKF | RMSE UKF (lidar only) | RMSE UKF (radar only) |
 | --- | --- |  --- | --- |
 | *0.09*  |  **0.0685** |  0.108 |  0.156 |
