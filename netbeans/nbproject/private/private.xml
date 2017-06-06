@@ -9,13 +9,6 @@
     </data>
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/home/merbar/git/CarND-Unscented-Kalman-Filter-Project/src/tools.cpp</file>
-            <file>file:/home/merbar/git/CarND-Unscented-Kalman-Filter-Project/src/ukf.cpp</file>
-            <file>file:/home/merbar/git/CarND-Unscented-Kalman-Filter-Project/src/tools.h</file>
-            <file>file:/home/merbar/git/CarND-Unscented-Kalman-Filter-Project/src/ukf.h</file>
-            <file>file:/home/merbar/git/CarND-Unscented-Kalman-Filter-Project/src/main.cpp</file>
-            <file>file:/home/merbar/git/CarND-Unscented-Kalman-Filter-Project/src/measurement_package.h</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

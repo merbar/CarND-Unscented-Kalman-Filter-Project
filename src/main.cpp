@@ -133,15 +133,15 @@ int main(int argc, char* argv[]) {
   UKF ukf;
   Tools tools_;
 
+  // start filtering from the second frame (the speed is unknown in the first frame)
+  size_t number_of_measurements = measurement_pack_list.size();
+  
   // used to compute the RMSE later
   vector<VectorXd> estimations;
+  estimations.reserve(number_of_measurements);
   vector<VectorXd> ground_truth;
-
-  // start filtering from the second frame (the speed is unknown in the first
-  // frame)
-
-  size_t number_of_measurements = measurement_pack_list.size();
-
+  ground_truth.reserve(number_of_measurements);
+  
   // column names for output file
   out_file_ << "px" << "\t";
   out_file_ << "py" << "\t";
